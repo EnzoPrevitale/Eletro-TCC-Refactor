@@ -1,0 +1,27 @@
+services:
+
+  backend:
+    build: ./tcc-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: jdbc:postgresql://db:5432/tcceletro?useSSL=false&serverTimezone=UTC
+      DATABASE_USER: tcceletro
+      DATABASE_PASSWORD: tcc-eln23
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: tcceletro
+      POSTGRES_PASSWORD: tcc-eln23
+      POSTGRES_DB: tcceletro
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
+      

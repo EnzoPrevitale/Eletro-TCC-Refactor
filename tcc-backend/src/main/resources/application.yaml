@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: tcc-backend
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
