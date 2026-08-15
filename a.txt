@@ -1,0 +1,8 @@
+.\.venv\Scripts\python.exe tcc-micro\main.py `
+  --port COM5 `
+  --backend-url http://localhost:8080 `
+  --mode cycle `
+  --cycles 5 `
+  --capacitor-uf 470 `
+  --resistor-ohm 2200 `
+  --verbose
