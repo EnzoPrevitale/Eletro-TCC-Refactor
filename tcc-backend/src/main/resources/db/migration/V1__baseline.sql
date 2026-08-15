@@ -1,32 +1,31 @@
-CREATE TYPE "cycleStatus" AS ENUM (
+CREATE TYPE cycleStatus AS ENUM (
     'CHARGE',
     'DISCHARGE'
     );
 
-CREATE TYPE "componentType" AS ENUM (
+CREATE TYPE componentType AS ENUM (
     'CAPACITOR',
     'RESISTOR'
     );
 
-CREATE TYPE "trialMode" AS ENUM (
+CREATE TYPE trialMode AS ENUM (
     'CYCLE',
     'TIME'
     );
 
-CREATE TYPE "trialStatus" AS ENUM (
+CREATE TYPE trialStatus AS ENUM (
     'IDLE',
-    'NEW TEST'
+    'NEW_TEST'
     );
 
 CREATE TABLE IF NOT EXISTS "trial" (
     "id" UUID NOT NULL,
-    "component_id" UUID NOT NULL,
     "mode" TRIALMODE NOT NULL,
     "cycles" INTEGER,
     "time" TIME,
-    "timeStarted" DATETIME NOT NULL,
-    "endTime" DATETIME,
-    "status" TRIALSTATUS NOT NULL,
+    "time_started" TIMESTAMP NOT NULL,
+    "end_time" TIMESTAMP,
+    "status" TRIALSTATUS NOT NULL DEFAULT 'NEW_TEST',
     "active" BOOLEAN NOT NULL DEFAULT true,
     PRIMARY KEY ("id")
 );
@@ -42,9 +41,9 @@ CREATE TABLE IF NOT EXISTS "cycle" (
 CREATE TABLE IF NOT EXISTS "measurement" (
     "id" UUID NOT NULL,
     "cycle_id" UUID NOT NULL,
-    "cycle_status" CYCLESTATE,
+    "cycle_status" CYCLESTATUS,
     "time" TIME,
-    "voltage" DOUBLE,
+    "voltage" DOUBLE PRECISION,
     "active" BOOLEAN NOT NULL DEFAULT true,
     PRIMARY KEY ("id")
 );

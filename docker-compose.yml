@@ -11,6 +11,26 @@ services:
       DATABASE_USER: tcceletro
       DATABASE_PASSWORD: tcc-eln23
 
+  frontend:
+    build: ./tcc-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  micro:
+    build: ./tcc-micro
+    profiles:
+      - micro
+    depends_on:
+      - backend
+    environment:
+      TCC_BACKEND_URL: http://backend:8080
+      TCC_SERIAL_PORT: ${TCC_SERIAL_PORT:-COM5}
+      TCC_BAUDRATE: ${TCC_BAUDRATE:-115200}
+      TCC_CAPACITOR_UF: ${TCC_CAPACITOR_UF:-470}
+      TCC_RESISTOR_OHM: ${TCC_RESISTOR_OHM:-2200}
+
   db:
     image: postgres:17
     environment:
